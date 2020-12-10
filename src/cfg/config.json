@@ -1,0 +1,13 @@
+{
+    "min_interval": 600,
+    "webhooks": [
+        {
+            "url": "https://discord.com/api/webhooks/xxxxx/xxxxx",
+            "avatar": "https://blog.soundcloud.com/wp-content/uploads/2016/05/cropped-sc_square_480.png",
+            "username": "SoundCloud"
+        }
+    ],
+    "usernames": [
+        "weebartist"
+    ]
+}

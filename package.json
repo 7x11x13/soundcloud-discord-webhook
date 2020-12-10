@@ -1,0 +1,22 @@
+{
+    "name": "soundcloud-discord-webhook",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/app.js",
+    "scripts": {
+        "start": "node src/app.js",
+        "lint": "prettier --write \"./**/*.js\" && eslint --fix \"./**/*.js\""
+    },
+    "author": "7x11x13",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^7.15.0",
+        "eslint-config-prettier": "^7.0.0",
+        "eslint-plugin-prettier": "^3.2.0",
+        "prettier": "^2.2.1"
+    },
+    "dependencies": {
+        "discord-webhook-node": "^1.1.8",
+        "soundcloud-scraper": "^4.0.1"
+    }
+}
