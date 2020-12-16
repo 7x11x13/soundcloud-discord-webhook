@@ -23,7 +23,7 @@ exports.saveConfig = () => {
     );
 };
 
-exports.saveCurrentTime = () => {
+exports.saveCurrentTime = async () => {
     module.exports.last_updated = new Date();
     fs.writeFileSync(
         path.join(__dirname, './cfg/last_updated.json'),
@@ -34,22 +34,26 @@ exports.saveCurrentTime = () => {
     );
 };
 
-exports.sendSongToWebhooks = (song) => {
+exports.sendSongsToWebhooks = async (songs) => {
     for (const webhook of module.exports.config.webhooks) {
         const hook = new Webhook(webhook.url);
         hook.setUsername(webhook.username);
         hook.setAvatar(webhook.avatar);
-        const embed = new MessageBuilder()
-            .setTitle(song.title)
-            .setAuthor(
-                song.user.username,
-                song.user.avatar_url,
-                song.user.permalink_url
-            )
-            .setImage(song.artwork_url)
-            .setDescription(song.description)
-            .setTimestamp(new Date(song.created_at))
-            .setURL(song.permalink_url);
-        hook.send(embed).catch(console.error);
+        for (const song of songs) {
+            const embed = new MessageBuilder()
+                .setTitle(song.title)
+                .setAuthor(
+                    song.user.username,
+                    song.user.avatar_url,
+                    song.user.permalink_url
+                )
+                .setImage(song.artwork_url)
+                .setDescription(song.description)
+                .setTimestamp(new Date(song.created_at))
+                .setURL(song.permalink_url);
+            hook.send(embed).catch((err) => {
+                throw err;
+            });
+        }
     }
 };
